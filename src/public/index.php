@@ -290,7 +290,7 @@ let a=0, filterBox, b0=0, b1=0, b2=0, c0=0, c1=0, c2=0, b, c, arr=[], arr1=[];
 							}
 myCl(); 
 function myFunction(myCheck) {
-
+	
 let checkBox = document.getElementById(myCheck);
    // если чекбокс нажат
 if (checkBox.checked) {	 a=a+1; 

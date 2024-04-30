@@ -56,12 +56,13 @@ $k=1;
 
 
 	
-	<center><font color="red">фирма</font></center><div style='user-select:none'>
-<input type="checkbox" id="m0" onclick="myFunction('m0');"  ><label for='m0' >рибок</label><br>
+<center><font color="red">фирма</font></center>
+<div style='user-select:none' onclick="document.location='index.php#';">
+<input type="checkbox" id="m0" onclick="myFunction('m0'); "><label for='m0'>рибок</label><br>
 <input type="checkbox" id="m1" onclick="myFunction('m1');"  ><label for='m1' >адидас</label><br> 
 <input type="checkbox" id="m2" onclick="myFunction('m2');" ><label for='m2' >найк</label><br>
 <input type="checkbox" id="m3" onclick="myFunction('m3');"><label for='m3' >пума</label><br>
-	</div>
+  </div>
 	
 	       <!-- <center><font color="red">обувь</font></center>
 <input type="checkbox" id="k0" onclick="myFunction('k0');"><label for='k0' >сапоги</label><br>
