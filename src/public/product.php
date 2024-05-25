@@ -303,6 +303,36 @@ function orderDesc1($j,$order,$from_record_num,$records_per_page)
 
 
 
+/* для auto_min2 */
+function order2($order,$from_record_num,$records_per_page)
+{
+
+    $query = "SELECT id,itog_0,marka,model FROM auto ORDER BY $order LIMIT {$from_record_num}, {$records_per_page} ";
+
+    $stmt7 = $this->conn->prepare($query);
+    $stmt7->execute();
+
+    return $stmt7;
+    
+}
+
+
+/* для auto_min2 */
+function orderDesc2($order,$from_record_num,$records_per_page)
+{
+
+    $query = "SELECT id,itog_0,marka,model FROM auto ORDER BY $order DESC LIMIT {$from_record_num}, {$records_per_page} ";
+
+    $stmt7 = $this->conn->prepare($query);
+    $stmt7->execute();
+
+    return $stmt7;
+    
+}
+
+
+
+
 
 
 

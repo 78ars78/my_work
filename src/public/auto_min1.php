@@ -7,7 +7,7 @@ $order= isset($_GET['order']) ? $_GET['order'] : 'marka';
 $f= isset($_GET['f']) ? $_GET['f'] : 1;
 $d= isset($_GET['d']) ? $_GET['d'] : 0; 
 
- // страница, указанная в параметре URL, страница по умолчанию - 1
+// страница, указанная в параметре URL, страница по умолчанию - 1
 $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
 // устанавливаем ограничение количества записей на странице
@@ -16,7 +16,6 @@ $records_per_page = 2;
 // подсчитываем лимит запроса
 $from_record_num = ($records_per_page * $page) - $records_per_page;
 ?>
-
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -57,7 +56,7 @@ bordercolor="black" width="100%" align= "center">
 
 
 
-<center>
+<center><br>
     <font color=black style="background-color: white ">&nbsp; сортировка по: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		
 

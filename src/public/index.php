@@ -1,12 +1,13 @@
 <? 
 $k = isset($_GET['k']) ? $_GET['k'] : 0;
-$i = isset($_GET['i']) ? $_GET['i'] : '';
+$i = isset($_GET['i']) ? $_GET['i'] : 0;
 $j = isset($_GET['j']) ? $_GET['j'] : 0;
-$l = isset($_GET['l']) ? $_GET['l'] : 0;
-$vertic = isset($_GET['vertic']) ? $_GET['vertic'] : 'inline-block';
-$gg = isset($_GET['gg']) ? $_GET['gg'] : 1;
 
- // страница, указанная в параметре URL, страница по умолчанию - 1
+$order= isset($_GET['order']) ? $_GET['order'] : 'marka';
+$f= isset($_GET['f']) ? $_GET['f'] : 1;
+$d= isset($_GET['d']) ? $_GET['d'] : 0; 
+
+// страница, указанная в параметре URL, страница по умолчанию - 1
 $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 
 // устанавливаем ограничение количества записей на странице
@@ -17,17 +18,15 @@ $from_record_num = ($records_per_page * $page) - $records_per_page;
 ?>
 
 
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en"><head>
 	<title>Выпадающее меню</title>
-
+    
 	<link rel="stylesheet" href="libs/css/custom.css">
 	<link rel="stylesheet" href="style.css">
   <style>
   body,td,th {	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif; }  
   </style>
-
 </head>
 
   
@@ -36,7 +35,7 @@ $from_record_num = ($records_per_page * $page) - $records_per_page;
 <body cellspacing="0" cellpadding="0" topmargin="0" leftmargin="0" align="left" background="img/Wooden.jpg">
 	<table topmargin="0" width="100%" leftmargin="0"   border="0" cellpadding="0" cellspacing="0" align="center" >
 	<tr><td>	
-		<?	include_once("layout_header.php"); ?>
+		<?	include_once "layout_header.php"; ?>
 
 		
 		
@@ -48,15 +47,41 @@ $from_record_num = ($records_per_page * $page) - $records_per_page;
 
 
     
-		<table style="border-bottom: none; border-left:none; border-right:none; border-top: none;" border="0px" topmargin="0" leftmargin="0"  cellpadding="0" cellspacing="0" 
-	   bordercolor="black" width="100%" align= "center">
-		</td></tr><tr width="100%" >
-		<td valign="top" width="205" bgcolor=" #cdcdcd"><?  include_once("lefttd.php"); ?>
-	</td><td  valign="top" style="background:white">
+<table style="border-bottom: none; border-left:none; border-right:none; border-top: none;" border="0px" topmargin="0" leftmargin="0"  cellpadding="0" cellspacing="0" 
+bordercolor="black" width="100%" align= "center">
+</td></tr><tr align="left" width="100%" >
+<td valign="top" width="205" bgcolor=" #cdcdcd"><? $n=$l; include_once "lefttd.php"; ?>
+</td><td  valign="top" style="background:white">
 
 
 
-    <?
+
+<center><br>
+    <font color=black style="background-color: white ">&nbsp; сортировка по: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
+
+		
+
+
+
+        <a style="<? if ($d==1) {echo "color:#C15E5F";} else {echo "color:#2C7CE9";} ?>; text-decoration: none; " href="auto_min2.php?order=marka&f=1&d=1<? echo "&i=$i"; ?>">
+        марка(возр) </a>	&nbsp;&nbsp;&nbsp;	
+                
+                
+            
+        <a style="<? if ($d==2) {echo "color:#C15E5F";} else {echo "color:#2C7CE9";} ?>; text-decoration: none" href="auto_min2.php?order=marka&f=2&d=2<? echo "&i=$i"; ?>"> марка(убыв) </a>	&nbsp;&nbsp;&nbsp;
+                
+                
+                
+         <a style="<? if ($d==3) {echo "color:#C15E5F";} else {echo "color:#2C7CE9";} ?>; text-decoration: none" href="auto_min2.php?order=model&f=1&d=3<? echo "&i=$i"; ?>"> модель </a>&nbsp;
+        
+            </font><br></center>
+
+
+
+
+
+    <?    
 include_once "config/database.php";
 include_once "product.php";
 
@@ -65,6 +90,9 @@ $database = new Database();
 $db = $database->getConnection();
 
 $product = new Product($db);
+
+
+
 
 // запрос товаров
 $stmt = $product->readAll($from_record_num, $records_per_page); 
@@ -76,148 +104,147 @@ $page_title = "Вывод товаров";
 
 
 
- // здесь будет пагинация
+
+
+
+/* 
+             if ($f==1) {  $stmt7 = $product->order1($j,$order,$from_record_num,$records_per_page); 
+  
+           
+           }
+               else {$stmt7 = $product->orderDesc1($j,$order,$from_record_num,$records_per_page);
+            
+            
+            }	
+    
+                
+                
+                if (!$stmt7) { include_once "end.php"; exit();}
+    
+
+                
+                while ($row7 = $stmt7->fetch(PDO::FETCH_ASSOC)) {
+                extract($row7);
+
+
+             
+
+
+         
+             printf("<table align='right' style='z-index: 3; position: relative;' class='lesson'>
+         <tr align='center' >
+        <td ><p   class='lesson_name'>
+        <a href='autopost.php?id=%s'><img src='img/auto/%s' ></a>
+        </p><p class='lesson_adds'>%s</p></td>
+         </tr>  <tr align='center'><td style='color: yellow;'>%s</td></tr>
+      </table>", $row7['id'], $row7['itog_0'], $row7['marka'], $row7['model']);  	
+              
+             
+       }  */
+
+
+
+
+
+
+
+
+    // здесь будет пагинация
 // страница, на которой используется пагинация
-$page_url = "index.php?";
+$page_url = "auto_min2.php?i=1&order=$order&f=$f&d=$d&";
 
 // подсчёт всех товаров в базе данных, чтобы подсчитать общее количество страниц
 $total_rows = $product->countAll2();
 
-
-
-
-
-
-
-echo "<center><div class='order'><font color=white style='background-color: black '>&nbsp; сортировка:&nbsp;&nbsp;</font>&nbsp;&nbsp;&nbsp;"; 
- if ($gg==1) { echo "<a href='?gg=1' style='color:#C15E5F; text-decoration:none'>по id&nbsp;&nbsp;&nbsp;</a>";}  else 
- { echo "<a href='?gg=1' style='color:#2C7CE9;text-decoration:none'>по id&nbsp;&nbsp;&nbsp;</a>";} 
- if ($gg==2) { echo "<a href='?gg=2' style='color:#C15E5F; text-decoration:none'>по марке&nbsp;&nbsp;&nbsp;</a>";}  else 
- { echo "<a href='?gg=2' style='color:#2C7CE9;text-decoration:none'>по марке&nbsp;&nbsp;&nbsp;</a>";} 
- if ($gg==3) { echo "<a href='?gg=3' style='color:#C15E5F; text-decoration:none'>по модели&nbsp;&nbsp;&nbsp;</a>";}  else 
- { echo "<a href='?gg=3' style='color:#2C7CE9;text-decoration:none'>по модели&nbsp;&nbsp;&nbsp;</a>";} 
-
-echo "</div></center><br>";
-
-
 // пагинация
-/* include_once "paging.php";  */
-
-
-
- 
+include "paging.php";
 
 
 
 
 
 
-
-echo "<div class='row_col'><a href=index.php?vertic=inline-block><img style='border:  1px solid gray;' src='blocki.jpg'></a>&nbsp";
-				 echo "<a href=index.php?vertic=block><img style='border:  1px solid gray;'  src='stroki.jpg'></a></div>";
-
-
-
-
-
-
-
-
-
-
-/* 	$l=0; $n=0;     
-$stmt11 = $product->auto1();
-while ($row11 = $stmt11->fetch(PDO::FETCH_ASSOC)) {
-extract($row11);
-    //  if($row1["firm"]==$n) {$l=$l-1;}
-
- printf( "<a href='#'  style='color:red;display:none' class='box%s bux%s'> <p style='color:red;'> %s</p> <p style='color:blue;'> %s</p> <p style='color:green;'> %s</p> </a>",$row11["фирма"],$row11["shoes"], $row11["text"],$row11["model"],$row11["marka"]); 
- 
- $boxa[]=$row11["фирма"]; $boxb[]=$row11["shoes"];
- $l=20;}  
-                 foreach($boxa as $bb)  { echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$bb;  } echo "<br>";
-                 foreach($boxb as $bb2) { echo "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$bb2; } echo "<br>"; */ 
-
-
-
-
-
-
-
-				
 
 // отображаем товары, если они есть
-if ($num > 0) {
+if ($num > 0 && $total_rows > 0) {
+
+    echo "<table class='table table-hover table-responsive table-bordered'><br>";
+        echo "<tr>";
+            echo "<th>Товар</th>";
+            echo "<th>Цена</th>";
+            echo "<th>Описание</th>";
+            echo "<th>Категория</th>";
+            echo "<th>Действия</th>";
+        echo "</tr>";
+
+        if ($f==1) {  $stmt7 = $product->order2($order,$from_record_num,$records_per_page); 
+  
+           
+        }
+            else {$stmt7 = $product->orderDesc2($order,$from_record_num,$records_per_page);
+         
+         
+         }	
+ 
+             
+             
+             if (!$stmt7) { include_once "end.php"; exit();}
 
 
 
-            if ($gg==1) {$g="ORDER BY id";}
-			if ($gg==2) {$g="ORDER BY marka";}
-			if ($gg==3) {$g="ORDER BY model";}
-			
-			$l=100;      
-            $stmt11 = $product->auto1($g);
-            while ($row11 = $stmt11->fetch(PDO::FETCH_ASSOC)) {
-            extract($row11);
+        while ($row7 = $stmt7->fetch(PDO::FETCH_ASSOC)) {
 
+            extract($row7);
 
-			echo "<table align='center' id='idd' class='box{$фирма} lesson'>
-			<tr align='center'>
-		   <td><p  class='lesson_name'>
-		   <a href='motopost.php?id={$id}'><img height=133 src='img/auto/{$itog_0}'></a>
-		   </p><p class='lesson_adds'>{$marka}</p></td>
-			</tr>  <tr align='center'><td style='color: yellow;' align=left><a  href='read_product.php?id={$id}' class='btn btn-primary left-margin'>
-     В корзину
-</a>{$model}</td></tr>
-</table>"; 
-
-?>
-<script>
-
-
-/* let cl = getComputedStyle(document.querySelector('.lesson')).display;
-if (cl == vert) {alert(cl);} else {alert('no vert!');} */
-
-/* function myCl() {
-	
-	if (cl == vert) {alert('vert!');} else {alert('no vert!');}
-	  }
-
-myCl();
- */
-	
-
-
-</script>		
-<?
-
-		
-		  } 	
-				 
-
-/* 
-            echo "<table ><tr class='box{$фирма}'><td><a href='index.php' > 
-            <img src='img/auto/{$itog_0v}'></td>
-            <td>{$marka}</td><td>{$model}</td><td></td><td>
- <p style='color:red;'></p> <p style='color:blue;'>вами</p> <p style='color:green;'></p></td>"; */
-
+            echo "<tr>";
+                echo "<td><img src='img/auto/".$row7['itog_0']."'></td>";
+                echo "<td>{$marka}</td>";
+                echo "<td>".$row7['model']."</td>";
+                echo "<td>";
+                    
+                echo "</td>";
+  
+                echo "<td>";
                     // здесь будут кнопки для просмотра, редактирования и удаления
 // ссылки/кнопки для просмотра, редактирования и удаления товара
+echo "<a href='read_product.php?id={$id}' class='btn btn-primary left-margin'>
+     В корзину
+</a>
 
-/* echo "<a href='read_product.php?id={$id}' class='btn btn-primary left-margin'>
-     Просмотр
-</a>";
-  */   /* $l=20;   echo "</a></tr>"; echo "</table>"; } */
-   }
+";
+                echo "</td>";
+
+            echo "</tr>";
+
+        }
+
+    echo "</table>";
+
+
+
+
+
+
+
+}
 
 // сообщим пользователю, что товаров нет
 else {
-    echo "<div class='alert alert-info'>Товары не найдены.</div>";
+    echo "<div class='alert alert-info'>&nbsp Товары не найдены.</div>";
 } ?>
 
 
 
-<? /* include "paging.php"; */ ?> 
+<? include "paging.php"; ?>
+
+
+
+
+
+
+
+
+
 
 		<!-- <table style="margin-top: 43px; margin-left: 20px" width=360 border=0 cellspacing=0 cellpadding=0>
 <tr>
@@ -227,6 +254,12 @@ else {
 <td><a href="javascript:doPic('4.jpg');"><img src="4.jpg" width=90 border=0></a></td>
 </tr>
 </table> -->
+		
+
+
+
+
+
 
 
 
@@ -235,23 +268,23 @@ else {
 		?> 
 	</td></tr></table></table>
 	 <center>
-<? require_once("layout_footer.php");  ?></center><br><br><br><br><br><br><br><br>
-
-
+	 
 		 
+		 <? require_once("layout_footer.php"); ?></center><br><br><br><br><br><br><br><br>
+
+
+
+
+
+
 <SCRIPT>
-
-
-
-
-
-
 
 let id1= <? echo json_encode($boxa); ?>; 
  let id2= <? echo json_encode($boxb); ?>;
 /*  id1.forEach( elem => { 
 			alert(elem);}); */
 let f=<? echo $l; ?>+1;  
+
 
 
 
@@ -265,66 +298,47 @@ document.mainpic.src = imgOn;
 
 
 
-let vert='<? echo $vertic;  ?>'; 
-
-
-let al;
-
-function myCl() { al=0; 
-let cl = document.querySelectorAll('.lesson');
-cl.forEach( elem => { 
- if (elem.style.display == vert) {al++;}  if (al>7) {elem.style.display="none";}
-//  if (elem.style.display !== vert) {al--;} 
-//  if (al>2) {elem.style.display="none"}   
-}   ); }
-
-	 
-
 
 let a=0, filterBox, b0=0, b1=0, b2=0, c0=0, c1=0, c2=0, b, c, arr=[], arr1=[];
-            if(a==0) { for (let h=1; h<f; h++) {
+            if(a==0) {  for (let h=1; h<f; h++) {
 		                        filterBox = document.querySelectorAll('.box'+h); 
 		                     	filterBox.forEach( elem => { 
-		                     	elem.style.display =vert ;} );  } 
-								 
-							}
-myCl(); 
-function myFunction(myCheck) {
-	
-let checkBox = document.getElementById(myCheck);
-   // если чекбокс нажат
-if (checkBox.checked) {	 a=a+1; 
+		                     	elem.style.display ="inline-block" ;} );  } }
+function myFunction(myCheck) { <? echo "kgv"; ?> let checkBox = document.getElementById(myCheck);
+       if (checkBox.checked){	 a=a+1; 
           for (let h=1; h<f; h=h+1) {
           filterBox = document.querySelectorAll('.box'+h); 
           filterBox.forEach( elem => { 
           elem.style.display ="none" ;} );   }    							
-		
-		  
-
-
-
+					
 			let	m0='m'+0;			
 	    if (myCheck==m0 || arr['0']==1 ) { arr['0']=1;
 		filterBox = document.querySelectorAll('.box1');
 		filterBox.forEach( elem => { 
-		elem.style.display =vert ;} ); arr1['0']=0; }		
+		elem.style.display ="inline-block" ;} ); arr1['0']=0; }		
+		
+		
+
+
+
+
 		
 					
 		if (checkBox==m1 || arr['1']==1 ) { arr['1']=1;
 			filterBox = document.querySelectorAll('.box2');
 			filterBox.forEach( elem => { 
-		elem.style.display =vert ;} ); arr1['1']=0;
+		elem.style.display ="inline-block" ;} ); arr1['1']=0;
  		 }					
 	
 		if (checkBox==m2 || arr['2']==1 ) { arr['2']=1;
    	    filterBox= document.querySelectorAll('.box3');
 		filterBox.forEach( elem => { 
-		elem.style.display =vert ;} ); arr1['2']=0;
+		elem.style.display ="inline-block" ;} ); arr1['2']=0;
     		}	
 		if (checkBox==m3 || arr['3']==1 ) { arr['3']=1;
    	    filterBox= document.querySelectorAll('.box4');
 		filterBox.forEach( elem => { 
-		elem.style.display =vert ;} ); arr1['3']=0;
+		elem.style.display ="inline-block" ;} ); arr1['3']=0;
     		}
 								
     /* let arr={myFirstName:'John'};for(key in arr) alert(key+':'+arr[key]);y=arr[key];alert(y);*/					
@@ -336,12 +350,12 @@ if (checkBox.checked) {	 a=a+1;
 	/*for (let h=0; h<f; h=h+1) {
 		     filterBox = document.querySelectorAll('.box'+h); 
 				filterBox.forEach( elem => { 
-					elem.style.display ="block" ;} );  
+					elem.style.display ="inline-block" ;} );  
 			 	  }
 		*/
 			   
 		 
-		        //  если отменить отмеченный чекбокс или он не нажат 
+		         
 		   if (checkBox==m0 || arr1['0']==1  || arr['0']==0) { arr1['0']=1;
 			filterBox= document.querySelectorAll('.box1');
 			filterBox.forEach( elem => { 
@@ -368,27 +382,25 @@ if (checkBox.checked) {	 a=a+1;
 		   
       }
 		   
-
+		   
+			 
 	 
-
+	 
+	 
+					
+	 
+	 
 if(a==0) {   for (let h=1; h<f; h=h+1) {
 		     filterBox = document.querySelectorAll('.box'+h); 
 				filterBox.forEach( elem => { 
-					elem.style.display =vert ;} );  
+					elem.style.display ="inline-block" ;} );  
 			 	  }
 				
 				}
  
  
- myCl();			
-
-	
-
-
+ 
  }
-
- 
- 
 
 
 	
@@ -402,7 +414,7 @@ if(a==0) {   for (let h=1; h<f; h=h+1) {
   var text = document.getElementById(text);
 	  // If the checkbox is checked, display the output text
  if (checkBox.checked == true ){	b=b+1; 
-    text.style.display = "block";
+    text.style.display = "inline-block";
   } 
 	 else {   b=b-1;
     text.style.display = "none";
@@ -421,13 +433,11 @@ if(a==0) {   for (let h=1; h<f; h=h+1) {
 
 
 
+
+
+
+
 </script>
-
-
-
-
-
-
 
 
 </body>

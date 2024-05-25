@@ -1,0 +1,108 @@
+
+
+<script>
+    function getFilteredItems(type) {
+        
+          // сомнительный момент – сбор выделенных типов (нужен ли он?)
+        
+          var checkedTypes = $(':checked').map(function(i,ch){
+        
+            return $(ch).data(type);
+        
+          });
+        
+          // сбор узлов для подсветки
+        
+          var resultItems = $('.item').filter(function(){
+        
+            // кэшируем текущий элемент чтобы передать в другой метод
+        
+            var item = $(this);
+        
+            // Возвращает true если хотя бы один элемент true
+        
+            return checkedTypes.some(function(typeItem){
+        
+              // проверка на совпадение data-аттрибута товара с data-аттрибутом чекбокса
+        
+              return typeItem==item.data(type);
+        
+            });
+        
+          });
+        
+          return resultItems;
+        
+        }
+        
+         
+        
+        $('#filter').find(':checkbox').click(function(){
+        
+          // кэшируем узлы
+        
+          var items = $('#goods').find('.item');
+        
+          var checked = $(':checked');
+        
+         
+        
+          // убрать подсветку со всех товаров
+        
+          items.removeClass('highlighted');
+        
+         
+        
+          // Если отмечен хотя бы один чекбокс – фильтровать
+        
+          if (checked.length>0) {
+    
+            items
+        
+              .css({'opacity':'.3'})
+        
+              .filter(getFilteredItems('foo'))
+        
+              .filter(getFilteredItems('bar'))
+        
+              .addClass('highlighted');
+        
+          }
+        
+          else { // иначе – ничего не делать
+        
+            items.css({'opacity':'1'});
+        
+          }
+        
+        });
+        </script>
+
+
+
+
+
+
+<!-- Чекбоксы -->
+
+<input type="checkbox" data-type="foo" data-foo="foo_item1">
+
+<input type="checkbox" data-type="foo" data-foo="foo_item2">
+
+
+
+<input type="checkbox" data-type="bar" data-bar="bar_item1">
+
+<input type="checkbox" data-type="bar" data-bar="bar_item2">
+
+ 
+
+<!-- Товары -->
+
+<div class="item" data-foo="foo_item1" data-bar="bar_item1" >
+
+<div class="item" data-foo="foo_item2" data-bar="bar_item2" >
+
+
+
+

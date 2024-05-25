@@ -1,7 +1,8 @@
-<? $k = isset($_GET['k']) ? $_GET['k'] : 0;
+<?
+$k = isset($_GET['k']) ? $_GET['k'] : 0;
 $i = isset($_GET['i']) ? $_GET['i'] : '';
 $j = isset($_GET['j']) ? $_GET['j'] : 0;
-$l = isset($_GET['l']) ? $_GET['l'] : '';
+$l = isset($_GET['l']) ? $_GET['l'] : 0;
 $order= isset($_GET['order']) ? $_GET['order'] : "marka";
 $f= isset($_GET['f']) ? $_GET['f'] : 1;
 $d= isset($_GET['d']) ? $_GET['d'] : 0; 
@@ -44,7 +45,7 @@ bordercolor="black" width="100%" align= "center">
 
 
 			
-		<center>	<font color=black style="background-color: white ">&nbsp; сортировка по: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<center><br>	<font color=black style="background-color: white ">&nbsp; сортировка по: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			
 	<a style="<? if ($d==1) {echo "color:#C15E5F";} else {echo "color:#2C7CE9";} ?>; text-decoration: none; " href="auto_min.php?order=marka&f=1&d=1<? echo "&j=$j&l=$l&i=$i"; ?>">
 	марка(возр) </a>	&nbsp;&nbsp;&nbsp;	

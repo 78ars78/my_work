@@ -14,7 +14,7 @@
 	
 
 <strong><center>---Обои---</center></strong>
-<div id="coolmenu1"><a href="index.php?i=1"></a></div>
+<div id="coolmenu1"><a href="auto_min2.php?i=1"></a></div>
 
 
 <? 
@@ -29,7 +29,7 @@ $db = $database->getConnection();
 	
 $product = new Product($db);
 
-/* if ($i==1) { */
+if ($i==1) {
 	 
 $k=1;
 	$stmt1 = $product->auto(); 
@@ -50,17 +50,17 @@ $k=1;
 		   $m=$m+1; 
 	   } }
 	$k=$k+1; 
-	   }  
+	   }  }
   ?>
 
+<div id="coolmenu2"><a href="moto_min.php?i=3"></a></div>
 
-
-	
+<? if ($i==3) { ?>
 <center><font color="red">фирма</font></center>
-<div style='user-select:none' onclick="document.location='index.php#';">
-<input type="checkbox" id="m0" onclick="myFunction('m0'); "><label for='m0'>рибок</label><br>
-<input type="checkbox" id="m1" onclick="myFunction('m1');"  ><label for='m1' >адидас</label><br> 
-<input type="checkbox" id="m2" onclick="myFunction('m2');" ><label for='m2' >найк</label><br>
+<div style='user-select:none'>
+<input type="checkbox" id="m0" onclick="myFunction('m0');"><label for='m0'>рибок</label><br>
+<input type="checkbox" id="m1" onclick="myFunction('m1');"><label for='m1' >адидас</label><br> 
+<input type="checkbox" id="m2" onclick="myFunction('m2');"><label for='m2' >найк</label><br>
 <input type="checkbox" id="m3" onclick="myFunction('m3');"><label for='m3' >пума</label><br>
   </div>
 	
@@ -70,7 +70,7 @@ $k=1;
 <input type="checkbox" id="k2" onclick="myFunction('k2');" ><label for='k2' >туфли</label><br>	 -->			
 
 
-	     
+<? } ?>
 	
 
 
