@@ -1,99 +1,55 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
+<!DOCTYPE html><html><head>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-
-<!--
-
-<link rel="stylesheet" type="text/css" href="tmp.css" />
-
--->
-
 <style type="text/css">
-
-.on {
-
-background-color: rgb(149, 221, 120);
-}
-
+.on { background-color: rgb(149, 221, 120); }
 </style>
-
 <script type="text/javascript">
 
 $(document).ready(function (){
-
-    $('#case > input:checkbox').click(function (){
-
-        $('#items > .item').removeClass('on');
-
-        var fltr=filter();
-
+    $('input').click(function (){
+       $('.item').removeClass('on');
+        let fltr=filter();
         if (fltr=='') return;
-
-        $('#items > .item'+fltr).addClass('on');
-
+        $('.item'+fltr).addClass('on');
     });
-
 });
-
 function filter() {
-
-    var str='';
-
-    $('#case > input:checkbox:checked').each(function (){
-
-        var typ=$(this).data('type');
-
-        str=str+'[data-'+typ+'='+$(this).data(typ)+']'
-
-    });
-
+    let str='';
+    $('input:checkbox:checked').each(function (){
+        let typ=$(this).data('type');
+        str=str+'[data-'+typ+'='+$(this).data(typ)+']';  });
     return str;
-
 };
 
-</script>
-
-</head>
-
-<body>
-
+</script></head><body>
 <!-- Чекбоксы -->
 
-<div id='case'>
 foo
-    <input type="checkbox" data-type="foo" data-foo="fo_it1" />
-
+    <input type="checkbox" data-type="f" data-f="f1" />
     <input type="checkbox" data-type="foo" data-foo="fo_it2" />
     <input type="checkbox" data-type="foo" data-foo="fo_it3" />
     ...
 bar
     <input type="checkbox" data-type="bar" data-bar="bar_item1" />
-
     <input type="checkbox" data-type="bar" data-bar="bar_item2" />
 
-</div>
 
 <!-- Товары -->
 
-<div id='items'>
 
-    <div class="item" data-foo="fo_it1" data-bar="bar_item1">
+    <div class="item" data-foo="fo_it3" data-f="f1" data-bar="bar_item1">
 
         foo_item1 bar_item1
 
     </div>
-    <div class="item" data-foo="fo_it3" data-bar="bar_item1">
+    <div class="item" data-foo="fo_it3" data-f="f1" data-bar="bar_item1">
 
         foo_item3 bar_item1
 
     </div>
     <div class="item" data-foo="fo_it3" data-bar="bar_item2">
 
-        foo_item3 bar_item1
+        foo_item3 bar_item2
 
     </div>
 
@@ -112,13 +68,13 @@ bar
 
     <div class="item" data-foo="fo_it2" data-bar="bar_item1">
 
-        foo_item2 bar_item2 bar_item1
+        foo_item2 bar_item1
 
     </div>
 
     ...
 
-</div>
+
 
 </body>
 

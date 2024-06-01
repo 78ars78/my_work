@@ -113,8 +113,8 @@ echo "</div></center><br>";
 
 
 
-echo "<div class='row_col'><a href=index.php?vertic=inline-block><img style='border:  1px solid gray;' src='blocki.jpg'></a>&nbsp";
-				 echo "<a href=index.php?vertic=block><img style='border:  1px solid gray;'  src='stroki.jpg'></a></div>";
+echo "<div class='row_col'><a href=moto_min.php?vertic=inline-block><img style='border:  1px solid gray;' src='blocki.jpg'></a>&nbsp";
+				 echo "<a href=moto_min.php?vertic=block><img style='border:  1px solid gray;'  src='stroki.jpg'></a></div>";
 
 
 
